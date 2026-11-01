@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>HomeSweetHub menu study</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1d1d22; --muted: #5c5c66; --line: #dcdce2;
+    --accent: #a0135e; --accent-fg: #ffffff; --soft: #f6f1f4; --chosen: #fbe7f1;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #16161a; --fg: #ececf1; --muted: #a6a6b1; --line: #33333b;
+            --accent: #e0609f; --accent-fg: #16161a; --soft: #22222a; --chosen: #3a1f2e; }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+         font: 17px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  main { max-width: 560px; margin: 0 auto; padding: 20px 16px 48px; }
+  h1 { font-size: 1.4rem; line-height: 1.3; margin: 0 0 12px; }
+  p { margin: 0 0 12px; }
+  .muted { color: var(--muted); font-size: 0.94rem; }
+  .persona { background: var(--soft); border-radius: 10px; padding: 12px 14px; margin: 0 0 16px; }
+  .btn { display: block; width: 100%; min-height: 48px; border: 0; border-radius: 10px;
+         background: var(--accent); color: var(--accent-fg); font: inherit; font-weight: 600;
+         padding: 12px 16px; cursor: pointer; }
+  .btn:disabled { opacity: 0.5; cursor: default; }
+  .btn.secondary { background: transparent; color: var(--accent); border: 1.5px solid var(--accent); }
+  .link { background: none; border: 0; color: var(--accent); font: inherit; text-decoration: underline;
+          padding: 12px 0; min-height: 44px; cursor: pointer; }
+  .progress { font-size: 0.9rem; color: var(--muted); margin-bottom: 6px; }
+  .task { font-size: 1.12rem; font-weight: 600; margin: 0 0 14px; }
+  .crumbs { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin: 0 0 8px; font-size: 0.94rem; }
+  .crumbs button { background: none; border: 0; color: var(--accent); font: inherit; padding: 10px 2px;
+                   min-height: 44px; text-decoration: underline; cursor: pointer; }
+  .crumbs span.sep { color: var(--muted); }
+  .crumbs span.here { font-weight: 600; padding: 10px 2px; }
+  ul.items { list-style: none; margin: 0 0 16px; padding: 0; border-top: 1px solid var(--line); }
+  ul.items li { border-bottom: 1px solid var(--line); }
+  ul.items button.item { display: flex; justify-content: space-between; align-items: center; width: 100%;
+         min-height: 52px; padding: 12px 8px; background: none; border: 0; color: var(--fg);
+         font: inherit; text-align: left; cursor: pointer; }
+  ul.items button.item[aria-pressed="true"] { background: var(--chosen); font-weight: 600; }
+  .chev { color: var(--muted); font-size: 1.3rem; padding-left: 12px; }
+  .pick { margin: 0 0 8px; }
+  .back { margin: 0 0 12px; }
+  fieldset { border: 0; padding: 0; margin: 0 0 20px; }
+  legend { font-weight: 600; margin-bottom: 8px; padding: 0; }
+  .scale { display: flex; gap: 8px; }
+  .scale label { flex: 1; text-align: center; border: 1.5px solid var(--line); border-radius: 10px;
+                 min-height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .scale input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .scale input:checked + span { font-weight: 700; }
+  .scale label:has(input:checked) { border-color: var(--accent); background: var(--chosen); }
+  .scale input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 4px; }
+  textarea, input[type=number] { width: 100%; font: inherit; color: var(--fg); background: var(--bg);
+         border: 1.5px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+  textarea { min-height: 88px; }
+  .ends { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  [tabindex="-1"]:focus { outline: none; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+</style>
+</head>
+<body>
+<main id="app" aria-live="polite"><p class="muted">Loading…</p></main>
+<script>
+/* ── Settings. FORM_ACTION and FORM_ENTRY come from Deryn's Google Form (see README.md). ── */
+const CONFIG = {
+  FORM_ACTION: 'https://docs.google.com/forms/d/e/1FAIpQLScTiW_r89O2mcVjGj5iRgNM-1qaPKQy9P-3RyZK9G2PFxDoLQ/formResponse',        // https://docs.google.com/forms/d/e/<form id>/formResponse
+  FORM_ENTRY: 'entry.815753870',          // entry.<number>
+  OPEN_STUDIES: ['P-current', 'P-proposed', 'P-proposed-HQ'], // studies a plain link can assign
+};
+
+const SEP = ' › ';
+const app = document.getElementById('app');
+const params = new URLSearchParams(location.search);
+const PILOT = params.has('pilot');
+let DATA, study, studyId, tasks, state;
+
+function el(tag, attrs = {}, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'on') for (const [ev, fn] of Object.entries(v)) e.addEventListener(ev, fn);
+    else if (k === 'class') e.className = v;
+    else if (v !== false && v != null) e.setAttribute(k, v === true ? '' : v);
+  }
+  for (const k of kids.flat()) if (k != null) e.append(k.nodeType ? k : document.createTextNode(k));
+  return e;
+}
+function render(...nodes) { app.replaceChildren(...nodes.filter(n => n != null)); const h = app.querySelector('h1,.task'); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); } window.scrollTo(0, 0); }
+
+function parseTree(text) {
+  const root = { label: '', children: [], path: '' };
+  const stack = [{ node: root, depth: -1 }];
+  for (const line of text.split('\n')) {
+    if (!line.trim()) continue;
+    const depth = (line.match(/^ */)[0].length) / 2;
+    while (stack[stack.length - 1].depth >= depth) stack.pop();
+    const parent = stack[stack.length - 1].node;
+    const node = { label: line.trim(), children: [], parent };
+    node.path = parent.path ? parent.path + SEP + node.label : node.label;
+    parent.children.push(node);
+    stack.push({ node, depth });
+  }
+  return root;
+}
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function store(k, v) { try { v === undefined ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} }
+function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+function uid() { return Math.random().toString(36).slice(2, 10) + Date.now().toString(36); }
+
+async function start() {
+  try {
+    DATA = await (await fetch('studies.json', { cache: 'no-store' })).json();
+  } catch (e) {
+    render(el('p', {}, 'Sorry, the study didn’t load. Please refresh the page.'));
+    return;
+  }
+  const forced = params.get('s');
+  studyId = forced && DATA.studies[forced] ? forced
+          : CONFIG.OPEN_STUDIES[Math.floor(Math.random() * CONFIG.OPEN_STUDIES.length)];
+  study = DATA.studies[studyId];
+  if (load('hsh-menu-study-done') && !PILOT && !params.has('again')) return renderAlreadyDone();
+  welcome();
+}
+
+function renderAlreadyDone() {
+  render(el('h1', {}, 'You’ve already taken part'),
+         el('p', {}, 'Thank you! Each person takes the study once, so there’s nothing more to do.'));
+}
+
+function welcome() {
+  render(
+    el('h1', {}, 'Help us test a menu'),
+    el('p', {}, 'You’ll see the menu of a home-loan and savings app as a list of words, with no screens. For each task, tap through the menu to where you’d expect to find it, then tap “I’d find it here”.'),
+    el('p', {}, 'There are no right or wrong answers. If something is hard to find, that’s the menu’s fault, not yours. If you have no idea, you can skip a task.'),
+    el('p', { class: 'muted' }, 'It takes about 10 minutes. We don’t ask for your name, contact details or any financial details. We record which menu items you tap, and how long each task takes.'),
+    el('div', { class: 'persona' }, el('strong', {}, 'Your role: '), DATA.personas[study.persona]),
+    el('button', { class: 'btn', on: { click: begin } }, 'Start'),
+    PILOT ? el('p', { class: 'muted' }, `Pilot run · ${studyId}`) : null,
+  );
+}
+
+function begin() {
+  tasks = shuffle(study.tasks);
+  state = { session: uid(), study: studyId, pilot: PILOT, version: DATA.version,
+            startedAt: new Date().toISOString(), viewport: `${innerWidth}x${innerHeight}`,
+            results: [], i: 0 };
+  runTask();
+}
+
+let tree, cur, chosen, t0, events;
+function runTask() {
+  if (state.i >= tasks.length) return endQuestions();
+  tree = parseTree(study.tree); cur = tree; chosen = null; events = []; t0 = performance.now();
+  drawTask();
+}
+function ms() { return Math.round(performance.now() - t0); }
+
+function drawTask() {
+  const task = tasks[state.i];
+  const crumbs = [];
+  const chain = []; for (let n = cur; n; n = n.parent) chain.unshift(n);
+  chain.forEach((n, idx) => {
+    const label = idx === 0 ? 'Menu' : n.label;
+    if (idx > 0) crumbs.push(el('span', { class: 'sep', 'aria-hidden': 'true' }, '›'));
+    crumbs.push(idx === chain.length - 1
+      ? el('span', { class: 'here', 'aria-current': 'location' }, label)
+      : el('button', { on: { click: () => goUp(n) } }, label));
+  });
+  const list = el('ul', { class: 'items', 'aria-label': cur === tree ? 'Menu' : cur.label },
+    cur.children.map(n => el('li', {}, el('button', {
+      class: 'item', 'aria-pressed': chosen === n ? 'true' : false,
+      on: { click: () => tap(n) } },
+      el('span', {}, n.label),
+      n.children.length ? el('span', { class: 'chev', 'aria-hidden': 'true' }, '›') : null,
+      n.children.length ? el('span', { class: 'sr' }, ', opens more') : null))));
+  const canPickHere = cur !== tree && !chosen;
+  render(
+    el('div', { class: 'progress' }, `Task ${state.i + 1} of ${tasks.length}`),
+    el('p', { class: 'muted' }, DATA.personas[study.persona]),
+    el('p', { class: 'task' }, task.text),
+    el('nav', { class: 'crumbs', 'aria-label': 'Where you are' }, crumbs),
+    cur !== tree ? el('button', { class: 'btn secondary back', on: { click: () => goUp(cur.parent) } }, '‹ Back') : null,
+    list,
+    chosen ? el('button', { class: 'btn pick', on: { click: () => finish(chosen) } }, `I’d find it here: ${chosen.label}`) : null,
+    canPickHere ? el('button', { class: 'btn secondary pick', on: { click: () => finish(cur) } }, `I’d find it here: ${cur.label}`) : null,
+    el('button', { class: 'link', on: { click: () => finish(null) } }, 'Skip this task'),
+  );
+}
+
+function tap(n) {
+  events.push({ t: ms(), a: n.children.length ? 'open' : 'leaf', p: n.path });
+  if (n.children.length) { cur = n; chosen = null; } else { chosen = n; }
+  drawTask();
+}
+function goUp(n) {
+  events.push({ t: ms(), a: 'back', p: n.path || '(top)' });
+  cur = n; chosen = null; drawTask();
+}
+function finish(node) {
+  const task = tasks[state.i];
+  const answer = node ? node.path : null;
+  state.results.push({
+    id: task.id, order: state.i + 1, answer, skipped: !node,
+    success: !!node && task.right.includes(answer),
+    backtracked: events.some(e => e.a === 'back'),
+    firstClick: events.length ? events[0].p : (node ? node.path : null),
+    ms: ms(), events,
+  });
+  state.i++; runTask();
+}
+
+function endQuestions() {
+  const proposed = study.menu === 'proposed';
+  const ease = el('fieldset', {}, el('legend', {}, 'How easy was it to find things overall?'),
+    el('div', { class: 'scale' }, [1, 2, 3, 4, 5].map(v =>
+      el('label', {}, el('input', { type: 'radio', name: 'ease', value: v }), el('span', {}, String(v))))),
+    el('div', { class: 'ends' }, el('span', {}, '1 = very hard'), el('span', {}, '5 = very easy')));
+  const word = el('textarea', { id: 'word' });
+  const count = el('input', { type: 'number', id: 'count', inputmode: 'numeric', min: 0, max: 20 });
+  render(
+    el('h1', {}, 'Three quick questions'),
+    ease,
+    el('fieldset', {}, el('legend', {}, el('label', { for: 'word' }, 'Was there a word in the menu you didn’t understand? Which one?')), word,
+      el('p', { class: 'muted' }, 'Optional')),
+    proposed ? el('fieldset', {}, el('legend', {}, el('label', { for: 'count' }, 'How many main sections did this menu have?')), count,
+      el('p', { class: 'muted' }, 'Your best guess. Optional')) : null,
+    el('button', { class: 'btn', on: { click: () => {
+      const r = app.querySelector('input[name=ease]:checked');
+      state.ease = r ? Number(r.value) : null;
+      state.unclearWord = word.value.trim().slice(0, 500) || null;
+      state.sectionCount = proposed && count.value !== '' ? Number(count.value) : null;
+      submit();
+    } } }, 'Send my answers'),
+  );
+}
+
+async function submit() {
+  state.finishedAt = new Date().toISOString();
+  const payload = { ...state }; delete payload.i;
+  const json = JSON.stringify(payload);
+  store('hsh-menu-study-pending', json);
+  render(el('p', {}, 'Sending…'));
+  try {
+    if (!CONFIG.FORM_ACTION || !CONFIG.FORM_ENTRY) throw new Error('not configured');
+    const body = new URLSearchParams({ [CONFIG.FORM_ENTRY]: json });
+    await fetch(CONFIG.FORM_ACTION, { method: 'POST', mode: 'no-cors', body });
+    store('hsh-menu-study-pending', undefined);
+    if (!PILOT) store('hsh-menu-study-done', '1');
+    render(el('h1', {}, 'Thank you!'),
+           el('p', {}, 'Your answers have been sent. You can close this page.'));
+  } catch (e) {
+    render(el('h1', {}, 'Your answers didn’t send'),
+           el('p', {}, 'Please check your internet connection and try again.'),
+           el('button', { class: 'btn', on: { click: submit } }, 'Try again'));
+  }
+}
+
+start();
+</script>
+</body>
+</html>

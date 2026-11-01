@@ -1,0 +1,109 @@
+{
+  "version": "2026-11-01 (development ed86b607f; nav labels last changed fc7b31576)",
+  "personas": {
+    "sam": "Imagine you're Sam. You're saving for your first home and use HomeSweetHub to track your deposit.",
+    "pat": "Imagine you're Pat. You own a home with a loan, 12 Banksia Street, and use HomeSweetHub to pay it off. You sold a unit last year."
+  },
+  "studies": {
+    "S-current": {
+      "persona": "sam",
+      "menu": "current",
+      "tree": "HomeSweetHub logo\nHubQuarters\nYour purchase plan\nMy Village\nYour deposit\nMore\n  Your savings story\n  Your target locations\n  Your suburb finder\n  Where you could buy now\n  Schemes\n  Your buying costs\n  Find a trade\n  Your Enquiry Summary\n  Data & sharing\n  Account settings\n  Your goals\n  Support\nMenu\n  Find a Village Partner\n  HomeSweetHub Lifecycle Guide\n  FAQ\n  HubQuarters\n  Your goals\n  My Village\n  Data & sharing\n  Support\nNotifications\n  See all notifications\nPage footer\n  Home",
+      "tasks": [
+        { "id": "S1", "spec": 1, "text": "You want to see how much you've saved towards your deposit. Where do you go?", "right": ["Your deposit", "HubQuarters", "Menu › HubQuarters"] },
+        { "id": "S2", "spec": 2, "text": "You want to know how much stamp duty you might pay on a $750,000 home. Where?", "right": ["More › Your buying costs"] },
+        { "id": "S3", "spec": 3, "text": "You heard about a first-home scheme and want to see if it might apply to you. Where?", "right": ["More › Schemes"] },
+        { "id": "S4", "spec": 4, "text": "You want to compare two suburbs you're thinking about. Where?", "right": ["More › Your suburb finder", "More › Your target locations"] },
+        { "id": "S5", "spec": 7, "text": "You want a plumber to fix a leaking tap. Where?", "right": ["More › Find a trade"] },
+        { "id": "S6", "spec": 8, "text": "You want to stop your broker seeing your loan balance. Where?", "right": ["More › Data & sharing", "Menu › Data & sharing", "My Village", "Menu › My Village"] },
+        { "id": "S7", "spec": 9, "text": "You want to turn off payday reminder emails. Where?", "right": ["More › Account settings"] },
+        { "id": "S8", "spec": 12, "text": "You want to check what a broker would see about you before you contact one. Where?", "right": ["More › Your Enquiry Summary"] },
+        { "id": "S9", "spec": null, "text": "You want to see all your figures together on one page. Where?", "right": ["HubQuarters", "Menu › HubQuarters"] },
+        { "id": "S10", "spec": null, "text": "You want to go back to the main HomeSweetHub website. Where?", "right": ["HomeSweetHub logo", "Page footer › Home"] },
+        { "id": "S11", "spec": null, "text": "You want to find the HomeSweetHub Lifecycle Guide. Where?", "right": ["Menu › HomeSweetHub Lifecycle Guide"] }
+      ]
+    },
+    "S-proposed": {
+      "persona": "sam",
+      "menu": "proposed",
+      "tree": "HomeSweetHub logo\nToday\n  HubQuarters\nPlan\n  Your deposit\n  Your savings story\n  Your purchase plan\n  Your buying costs\n  Schemes\n  Learn\nSuburbs\n  Your suburb finder\n  Where you could buy now\n  Your target locations\n  Median sale prices in your areas\nVillage\n  My Village\n  Find a Village Partner\n  Find a trade\n  Your Enquiry Summary\nAccount\n  Your goals\n  Support\n  FAQ\n  Learn\n  HomeSweetHub Lifecycle Guide\n  HomeSweetHub website\n  Notifications\n  Data & sharing\n  Account settings\n  Start page\n  Delete account\nPage footer\n  Support\n  HomeSweetHub website",
+      "tasks": [
+        { "id": "S1", "spec": 1, "text": "You want to see how much you've saved towards your deposit. Where do you go?", "right": ["Plan › Your deposit", "Today", "Today › HubQuarters"] },
+        { "id": "S2", "spec": 2, "text": "You want to know how much stamp duty you might pay on a $750,000 home. Where?", "right": ["Plan › Your buying costs"] },
+        { "id": "S3", "spec": 3, "text": "You heard about a first-home scheme and want to see if it might apply to you. Where?", "right": ["Plan › Schemes"] },
+        { "id": "S4", "spec": 4, "text": "You want to compare two suburbs you're thinking about. Where?", "right": ["Suburbs › Your suburb finder", "Suburbs › Your target locations"] },
+        { "id": "S5", "spec": 7, "text": "You want a plumber to fix a leaking tap. Where?", "right": ["Village › Find a trade"] },
+        { "id": "S6", "spec": 8, "text": "You want to stop your broker seeing your loan balance. Where?", "right": ["Account › Data & sharing", "Village › My Village"] },
+        { "id": "S7", "spec": 9, "text": "You want to turn off payday reminder emails. Where?", "right": ["Account › Notifications", "Account › Account settings"] },
+        { "id": "S8", "spec": 12, "text": "You want to check what a broker would see about you before you contact one. Where?", "right": ["Village › Your Enquiry Summary"] },
+        { "id": "S9", "spec": null, "text": "You want to see all your figures together on one page. Where?", "right": ["Today › HubQuarters"] },
+        { "id": "S10", "spec": null, "text": "You want to go back to the main HomeSweetHub website. Where?", "right": ["Account › HomeSweetHub website", "Page footer › HomeSweetHub website"] },
+        { "id": "S11", "spec": null, "text": "You want to find the HomeSweetHub Lifecycle Guide. Where?", "right": ["Account › HomeSweetHub Lifecycle Guide"] }
+      ]
+    },
+    "P-current": {
+      "persona": "pat",
+      "menu": "current",
+      "tree": "HomeSweetHub logo\nHubQuarters\nFreedom Plan\nMy Village\nHub Progress statement\nMore\n  Your Swaps & Boosts\n  Sale prices around you\n  Your suburb finder\n  Your shortlist\n  Previous properties\n  Find a trade\n  Your Enquiry Summary\n  Data & sharing\n  Account settings\n  Your goals\n  Support\nMenu\n  Find a Village Partner\n  HomeSweetHub Lifecycle Guide\n  FAQ\n  HubQuarters\n  Your goals\n  My Village\n  Data & sharing\n  Support\nNotifications\n  See all notifications\nPage footer\n  Home",
+      "tasks": [
+        { "id": "P1", "spec": 4, "text": "You want to compare two suburbs you're thinking about. Where?", "right": ["More › Your suburb finder", "More › Your shortlist"] },
+        { "id": "P2", "spec": 5, "text": "You paid an extra $500 off your loan and want to record it. Where?", "right": ["HubQuarters", "Menu › HubQuarters", "More › Your Swaps & Boosts"] },
+        { "id": "P3", "spec": 6, "text": "You want to see when you could be mortgage-free. Where?", "right": ["Freedom Plan", "HubQuarters", "Menu › HubQuarters"] },
+        { "id": "P4", "spec": 7, "text": "You want a plumber to fix a leaking tap. Where?", "right": ["More › Find a trade"] },
+        { "id": "P5", "spec": 8, "text": "You want to stop your broker seeing your loan balance. Where?", "right": ["More › Data & sharing", "Menu › Data & sharing", "My Village", "Menu › My Village"] },
+        { "id": "P6", "spec": 9, "text": "You want to turn off payday reminder emails. Where?", "right": ["More › Account settings"] },
+        { "id": "P7", "spec": 10, "text": "You sold a property last year and want to look at its details. Where?", "right": ["More › Previous properties"] },
+        { "id": "P8", "spec": 11, "text": "You want to see what homes near you sold for recently. Where?", "right": ["More › Sale prices around you"] },
+        { "id": "P9", "spec": 12, "text": "You want to check what a broker would see about you before you contact one. Where?", "right": ["More › Your Enquiry Summary"] },
+        { "id": "P10", "spec": null, "text": "You want to see all your figures together on one page. Where?", "right": ["HubQuarters", "Menu › HubQuarters"] },
+        { "id": "P11", "spec": null, "text": "You want to see your loan balance and how much of your home you own. Where?", "right": ["HubQuarters", "Menu › HubQuarters", "Hub Progress statement"] },
+        { "id": "P12", "spec": null, "text": "You want to go back to the main HomeSweetHub website. Where?", "right": ["HomeSweetHub logo", "Page footer › Home"] },
+        { "id": "P13", "spec": null, "text": "You want to find the HomeSweetHub Lifecycle Guide. Where?", "right": ["Menu › HomeSweetHub Lifecycle Guide"] },
+        { "id": "P14", "spec": null, "text": "You're also saving for an investment property and track it in HomeSweetHub. You want to switch to that goal. Where?", "right": ["More › Your goals", "Menu › Your goals"] }
+      ]
+    },
+    "P-proposed": {
+      "persona": "pat",
+      "menu": "proposed",
+      "tree": "HomeSweetHub logo\nToday\n  HubQuarters\nPlan\n  Freedom Plan\n  Hub Progress statement\n  Your Swaps & Boosts\n  Sale prices around you\n  Your suburb finder\n  Your shortlist\n  Learn\nYour home\n  12 Banksia Street\n    Overview\n    Loan\n    Jobs\n    About\n  Previous homes\nVillage\n  My Village\n  Find a Village Partner\n  Find a trade\n  Your Enquiry Summary\nAccount\n  Your goals\n  Support\n  FAQ\n  Learn\n  HomeSweetHub Lifecycle Guide\n  HomeSweetHub website\n  Notifications\n  Data & sharing\n  Account settings\n  Start page\n  Delete account\nPage footer\n  Support\n  HomeSweetHub website",
+      "tasks": [
+        { "id": "P1", "spec": 4, "text": "You want to compare two suburbs you're thinking about. Where?", "right": ["Plan › Your suburb finder", "Plan › Your shortlist"] },
+        { "id": "P2", "spec": 5, "text": "You paid an extra $500 off your loan and want to record it. Where?", "right": ["Today", "Plan › Your Swaps & Boosts", "Your home › 12 Banksia Street › Loan"] },
+        { "id": "P3", "spec": 6, "text": "You want to see when you could be mortgage-free. Where?", "right": ["Plan › Freedom Plan", "Today", "Today › HubQuarters"] },
+        { "id": "P4", "spec": 7, "text": "You want a plumber to fix a leaking tap. Where?", "right": ["Village › Find a trade", "Your home › 12 Banksia Street › Jobs"] },
+        { "id": "P5", "spec": 8, "text": "You want to stop your broker seeing your loan balance. Where?", "right": ["Account › Data & sharing", "Village › My Village"] },
+        { "id": "P6", "spec": 9, "text": "You want to turn off payday reminder emails. Where?", "right": ["Account › Notifications", "Account › Account settings"] },
+        { "id": "P7", "spec": 10, "text": "You sold a property last year and want to look at its details. Where?", "right": ["Your home › Previous homes"] },
+        { "id": "P8", "spec": 11, "text": "You want to see what homes near you sold for recently. Where?", "right": ["Plan › Sale prices around you"] },
+        { "id": "P9", "spec": 12, "text": "You want to check what a broker would see about you before you contact one. Where?", "right": ["Village › Your Enquiry Summary"] },
+        { "id": "P10", "spec": null, "text": "You want to see all your figures together on one page. Where?", "right": ["Today › HubQuarters"] },
+        { "id": "P11", "spec": null, "text": "You want to see your loan balance and how much of your home you own. Where?", "right": ["Plan › Hub Progress statement", "Today", "Today › HubQuarters", "Your home › 12 Banksia Street › Loan"] },
+        { "id": "P12", "spec": null, "text": "You want to go back to the main HomeSweetHub website. Where?", "right": ["Account › HomeSweetHub website", "Page footer › HomeSweetHub website"] },
+        { "id": "P13", "spec": null, "text": "You want to find the HomeSweetHub Lifecycle Guide. Where?", "right": ["Account › HomeSweetHub Lifecycle Guide"] },
+        { "id": "P14", "spec": null, "text": "You're also saving for an investment property and track it in HomeSweetHub. You want to switch to that goal. Where?", "right": ["Account › Your goals", "Today"] }
+      ]
+    },
+    "P-proposed-HQ": {
+      "persona": "pat",
+      "menu": "proposed",
+      "note": "P-proposed with the Plan tab named HubQuarters (2026-10-25 decision, check 3). Today's HubQuarters row is kept on purpose.",
+      "tree": "HomeSweetHub logo\nToday\n  HubQuarters\nHubQuarters\n  Freedom Plan\n  Hub Progress statement\n  Your Swaps & Boosts\n  Sale prices around you\n  Your suburb finder\n  Your shortlist\n  Learn\nYour home\n  12 Banksia Street\n    Overview\n    Loan\n    Jobs\n    About\n  Previous homes\nVillage\n  My Village\n  Find a Village Partner\n  Find a trade\n  Your Enquiry Summary\nAccount\n  Your goals\n  Support\n  FAQ\n  Learn\n  HomeSweetHub Lifecycle Guide\n  HomeSweetHub website\n  Notifications\n  Data & sharing\n  Account settings\n  Start page\n  Delete account\nPage footer\n  Support\n  HomeSweetHub website",
+      "tasks": [
+        { "id": "P1", "spec": 4, "text": "You want to compare two suburbs you're thinking about. Where?", "right": ["HubQuarters › Your suburb finder", "HubQuarters › Your shortlist"] },
+        { "id": "P2", "spec": 5, "text": "You paid an extra $500 off your loan and want to record it. Where?", "right": ["Today", "HubQuarters › Your Swaps & Boosts", "Your home › 12 Banksia Street › Loan"] },
+        { "id": "P3", "spec": 6, "text": "You want to see when you could be mortgage-free. Where?", "right": ["HubQuarters › Freedom Plan", "Today", "Today › HubQuarters"] },
+        { "id": "P4", "spec": 7, "text": "You want a plumber to fix a leaking tap. Where?", "right": ["Village › Find a trade", "Your home › 12 Banksia Street › Jobs"] },
+        { "id": "P5", "spec": 8, "text": "You want to stop your broker seeing your loan balance. Where?", "right": ["Account › Data & sharing", "Village › My Village"] },
+        { "id": "P6", "spec": 9, "text": "You want to turn off payday reminder emails. Where?", "right": ["Account › Notifications", "Account › Account settings"] },
+        { "id": "P7", "spec": 10, "text": "You sold a property last year and want to look at its details. Where?", "right": ["Your home › Previous homes"] },
+        { "id": "P8", "spec": 11, "text": "You want to see what homes near you sold for recently. Where?", "right": ["HubQuarters › Sale prices around you"] },
+        { "id": "P9", "spec": 12, "text": "You want to check what a broker would see about you before you contact one. Where?", "right": ["Village › Your Enquiry Summary"] },
+        { "id": "P10", "spec": null, "text": "You want to see all your figures together on one page. Where?", "right": ["Today › HubQuarters"] },
+        { "id": "P11", "spec": null, "text": "You want to see your loan balance and how much of your home you own. Where?", "right": ["HubQuarters › Hub Progress statement", "Today", "Today › HubQuarters", "Your home › 12 Banksia Street › Loan"] },
+        { "id": "P12", "spec": null, "text": "You want to go back to the main HomeSweetHub website. Where?", "right": ["Account › HomeSweetHub website", "Page footer › HomeSweetHub website"] },
+        { "id": "P13", "spec": null, "text": "You want to find the HomeSweetHub Lifecycle Guide. Where?", "right": ["Account › HomeSweetHub Lifecycle Guide"] },
+        { "id": "P14", "spec": null, "text": "You're also saving for an investment property and track it in HomeSweetHub. You want to switch to that goal. Where?", "right": ["Account › Your goals", "Today"] }
+      ]
+    }
+  }
+}
